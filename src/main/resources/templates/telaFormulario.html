@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Formulário de treinamento</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            text-align: center;
+            background-color: #91AC9A;
+        }
+        
+        label {
+            display: block;
+            margin: 10px;
+        }
+        
+        input[type="text"], input[type="number"], textarea {
+            width: 90%;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        
+        button[type="submit"] {
+            background-color: #91AC9A;
+            margin-top: 10px;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #50e358;
+        }
+        
+        legend {
+            font-size: 25px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        
+        .container{
+            width: 70%;
+            height: 90%;
+            margin: 0 auto;
+            text-align: center;
+            border: 1px solid #ccc;
+            padding: 20px;
+            background-color: #A9C3B6;
+            margin-top: 0;
+        }
+
+        .remove {
+            background-color: #b21008;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+            margin-bottom: 15px;
+        }
+        
+        .remove:hover {
+            background-color: #ff1e12;
+        }
+        
+        .add {
+            background-color: #50e358;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+        
+        .add:hover {
+            background-color: #8cda90;
+        }
+        
+        .ex {
+            border: 1px solid rgb(111, 111, 111);
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            margin: auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Formulário de Treinamento</h1>
+        </header>
+    <main>
+        <form th:action="@{/add}" method="post" enctype="multipart/form-data" th:object="${formulario}">
+            <section>
+                <fieldset>
+                    <legend>Dados do Aluno</legend>
+                    <label for="aluno_nome">Nome Completo:</label>
+                    <input type="text" id="aluno_nome" th:field="*{aluno.nome}" placeholder="Nome Completo" required>
+                    <label for="aluno_data_nascimento">Data de nascimento:</label>
+                    <input type="text" id="aluno_data_nascimento" th:field="*{aluno.Data}" placeholder="DD/MM/AAAA" pattern="\d{2}/\d{2}/\d{4}" required>
+                    <label for="aluno_peso">Peso:</label>
+                    <input type="text" id="aluno_peso" th:field="*{aluno.Peso}" placeholder="Kg" required>
+                    <label for="aluno_altura" >Altura:</label>
+                    <input type="text" id="aluno_altura" th:field="*{aluno.Altura}" placeholder="m" required>
+                    <label for="aluno_obs">Restrições/Limitações:</label>
+                    <textarea id="aluno_obs" th:field="*{aluno.Obs}" rows="4" cols="50" placeholder="Ex: 'Problemas cardíacos'"></textarea>
+                    <label for="aluno_anamnese">Anamnese:</label>
+                    <textarea id="aluno_anamnese" th:field="*{aluno.Anamnese}" placeholder="Informações de histórico de treinamento" required></textarea>
+                    <label for="aluno_objetivos" >Objetivo:</label>
+                    <input type="text" id="aluno_objetivos" th:field="*{aluno.objetivos}" placeholder="Ex: Hipertrofia" required>
+                </fieldset>
+            </section>
+            <section>
+                <fieldset>
+                    <legend>Treinamento</legend>
+                    <label for="treino_inicio">Inicio:</label>
+                    <input type="text" id="treino_inicio" th:field="*{treino.Inicio}" placeholder="DD/MM/AAAA" pattern="\d{2}/\d{2}/\d{4}" required>
+                    <label for="treino_periodo">Período de treino:</label>
+                    <input type="text" id="treino_periodo" th:field="*{treino.periodo}" placeholder="Ex: 3 semanas" required>
+                    <label for="treino_prescricao">Prescrição:</label>
+                    <input type="text" id="treino_prescricao" th:field="*{treino.prescricao}" placeholder="Ex: A-B-C ou A-B" required>
+                    <label for="treino_objetivo">Objetivo:</label>
+                    <textarea id="treino_objetivo" th:field="*{treino.objetivo}" rows="4" cols="50" placeholder="Ex: 'Foco em hipertrofia e saúde cardíaca'" required></textarea>
+                    <label>Grupo Muscular:</label>
+                    <input type="text" id="treino_grupomuscular" th:field="*{treino.GrupoMuscular}" placeholder="Ex: Peito e tríceps" required>
+                    <label for="treino_tipo">Tipo</label>
+                    <input type="text" id="treino_tipo" th:field="*{treino.tipo}" placeholder="Ex: A" required>
+                </fieldset>
+            </section>
+            <section>
+                <fieldset>
+                <legend>Treino</legend>
+                    <div class="exercicio" id="exercicios">
+                        <div>
+                            <label for="exercicio_1">Exercício 1:</label>
+                            <input type="text" id="exercicio_1" name="exercicio[0].nome" placeholder="Nome do exercicio" required>
+                            <label for="series_1">Séries:</label>
+                            <input type="number" id="series_1" name="exercicio[0].series" placeholder="Nmr de séries" required>
+                            <label for="repeticoes_1">Repetições:</label>
+                            <input type="number" id="repeticoes_1" name="exercicio[0].repeticoes" placeholder="Nmr de repetições" required>
+                        </div>
+                    </div>
+                    <button type="button" class="add" id="adicionarExercicio">Adicionar Exercício</button>
+                </fieldset>
+            </section>
+            <button type="submit">Enviar</button>
+        </form>
+    
+    </main>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        var divExercicios = document.getElementById("exercicios");
+        var botaoAdicionarExercicio = document.getElementById("adicionarExercicio");
+        var contadorExercicios = 1;
+
+        botaoAdicionarExercicio.addEventListener("click", function() {
+            contadorExercicios++;
+
+            var novoExercicio = document.createElement("div");
+            novoExercicio.classList.add("exercicio");
+
+            novoExercicio.innerHTML = `
+                <label for="exercicio_${contadorExercicios}">Exercício ${contadorExercicios}:</label>
+                <input type="text" id="exercicio_${contadorExercicios}" name="exercicio[${contadorExercicios - 1}].nome" placeholder="Nome do exercicio" required>
+                <label for="series_${contadorExercicios}">Séries:</label>
+                <input type="number" id="series_${contadorExercicios}" name="exercicio[${contadorExercicios - 1}].series" placeholder="Nmr de séries" required>
+                <label for="repeticoes_${contadorExercicios}">Repetições:</label>
+                <input type="number" id="repeticoes_${contadorExercicios}" name="exercicio[${contadorExercicios - 1}].repeticoes" placeholder="Nmr de repetições" required>
+                <button type="button" class="remove">Remover Exercício</button>
+            `;
+
+            divExercicios.appendChild(novoExercicio);
+        });
+
+        divExercicios.addEventListener("click", function(event) {
+            if (event.target.classList.contains("remove")) {
+                event.target.parentElement.remove();
+                contadorExercicios--;
+            }
+        });
+    });
+
+    </script>
+</body>
+</html>
